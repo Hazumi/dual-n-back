@@ -10,6 +10,12 @@ $(document).ready(function() {
   const $8 = $('#8');
   const $9 = $('#9');
 
+  const $correct = $('#correct');
+  const $incorrect = $('#incorrect');
+
+  var correct = 0;
+  var incorrect = 0;
+
   const posArr = [$1, $2, $3, $4, $5, $6, $7, $8, $9];
   const colorArr = ['red', 'blue', 'green', 'yellow', 'purple', 'black', 'pink', 'orange', 'gray', 'navy'];
 
@@ -50,21 +56,30 @@ $(document).ready(function() {
 
   }, 2500);
 
+  const updateCorrect = () => {
+    correct++;
+    $correct.text(correct);
+  }
+
+  const updateIncorrect = () => {
+    incorrect++;
+    $incorrect.text(incorrect);
+  }
 
   $locationBtn.on('click', function() {
     if(square == lastPos2 && typeof lastPos2 !== 'undefined') {
-      console.log('success');
+      updateCorrect();
     } else {
-      console.log('wrong');
+      updateIncorrect();
     }
     $(this).prop('disabled', true);
   });
 
   $colorBtn.on('click', function() {
     if(color == lastColor2 && typeof lastColor2 !== 'undefined') {
-      console.log('color success');
+      updateCorrect();
     } else {
-      console.log('wrong');
+      updateIncorrect();
     }
     $(this).prop('disabled', true);
     $(this).addClass('disabled');

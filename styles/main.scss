@@ -1,4 +1,9 @@
+body {
+  font-size: 16px;
+}
+
 h1 {
+  font-family: 'Jura', sans-serif;
   text-align: center;
 }
 
@@ -19,4 +24,23 @@ h1 {
     height: 33.334%;
     background-color: #e8e8e8;
   }
+}
+
+.score {
+  font-size: 1.2em;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+#correct, #incorrect {
+  font-weight: bold;
+}
+#incorrect {
+  color: red;
 }
