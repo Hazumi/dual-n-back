@@ -31,6 +31,9 @@ button:hover {
 button:disabled {
   cursor: default; }
 
+#location-btn, #color-btn {
+  text-transform: uppercase; }
+
 #correct, #incorrect {
   font-weight: bold; }
 

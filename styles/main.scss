@@ -11,6 +11,7 @@ h1 {
   margin: 0 auto;
   display: flex;
   width: 600px;
+
   height: 600px;
   flex-flow: row wrap;
   & div {
@@ -36,6 +37,10 @@ button:hover {
 
 button:disabled {
   cursor: default;
+}
+
+#location-btn, #color-btn {
+  text-transform: uppercase;
 }
 
 #correct, #incorrect {

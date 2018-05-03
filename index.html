@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Dual N-Back</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Jura|Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/main.css">
@@ -10,6 +11,7 @@
   <body>
 
     <h1 class="my-4">Dual N-Back</h1>
+
     <div class="board">
       <div id="1"></div>
       <div id="2"></div>
@@ -23,13 +25,19 @@
     </div>
 
     <div class="m-4 score text-center">
-      <span>Correct <span id="correct">0</span></span> -
-      <span>Incorrect <span id="incorrect">0</span></span>
+      <span>Correct: <span id="correct">0</span></span> -
+      <span>Incorrect: <span id="incorrect">0</span></span>
+      <br><br>
+      <span>Current Speed: <strong>2.5s</strong></span><br>
+      <span>Total Placements: <span id="total-placements">0</span></span><br>
+      <span>Missed Position Matches: <span id="missed-position">0</span></span>
+      <br>
+      <span>Missed Color Matches: <span id="missed-color">0</span></span>
     </div>
 
     <div class=" text-center">
-      <button id="location-btn" class="btn-primary btn-lg">Position</button>
-      <button id="color-btn" class="btn-success btn-lg">Color</button>
+      <button id="location-btn" class="btn-primary btn-lg">Position (1)</button>
+      <button id="color-btn" class="btn-success btn-lg">Color (2)</button>
     </div>
 
 
