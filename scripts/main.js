@@ -15,6 +15,8 @@ $(document).ready(function() {
   const $missedColor = $('#missed-color');
   const $locationBtn = $('#location-btn');
   const $colorBtn = $('#color-btn');
+
+  const $newGameBtn = $('#new-game-btn');
   const posArr = [$1, $2, $3, $4, $5, $6, $7, $8, $9];
   const colorArr = ['red', 'blue', 'green', 'yellow', 'purple', 'black', 'pink', 'orange', 'gray', 'navy'];
   let total = 0;
@@ -25,57 +27,68 @@ $(document).ready(function() {
   let square, color, rand9, rand10, lastColor1, lastColor2, lastColor3, lastPos1, lastPos2, lastPos3;
   let positionClicked;
   let colorClicked;
+  let numPlacements = 0;
+  let maxPlacements = 40;
+  let gameOver = false;
 
   const genRandNum = num => {
     return Math.floor(Math.random() * num );
   }
 
-  setInterval(function() {
+  function gameEnd() {
+    square.css('background-color', '#e8e8e8');
+    gameOver = true;
+  }
 
-    if(square == lastPos3 && typeof lastPos3 !== 'undefined' && locationClicked === false) {
-      console.log('miss position');
-      missedPos++;
-      $missedPosition.text(missedPos);
+  if(!gameOver) {
+    setInterval(function() {
+      if(numPlacements < maxPlacements) {
+        if(square == lastPos3 && typeof lastPos3 !== 'undefined' && locationClicked === false) {
+          missedPos++;
+          $missedPosition.text(missedPos);
+        }
+        if(color == lastColor3 && typeof lastColor3 !== 'undefined' && colorClicked === false) {
+          missedColor++;
+          $missedColor.text(missedColor);
+        }
 
-    }
-    if(color == lastColor3 && typeof lastColor3 !== 'undefined' && colorClicked === false) {
-      console.log('miss color');
-      missedColor++;
-      $missedColor.text(missedColor);
-    }
+        locationClicked = false;
+        colorClicked = false;
 
-    locationClicked = false;
-    colorClicked = false;
+        if ($locationBtn.prop('disabled')) {
+          $locationBtn.prop('disabled', false);
+        }
+        if ($colorBtn.prop('disabled')) {
+          $colorBtn.prop('disabled', false);
+        }
 
-    if ($locationBtn.prop('disabled')) {
-      $locationBtn.prop('disabled', false);
-    }
-    if ($colorBtn.prop('disabled')) {
-      $colorBtn.prop('disabled', false);
-    }
+        if(square) {
+          square.css('background-color', '#e8e8e8');
+        }
 
-    if(square) {
-      square.css('background-color', '#e8e8e8');
-    }
+        lastColor3 = lastColor2;
+        lastColor2 = lastColor1;
+        lastColor1 = color;
 
-    lastColor3 = lastColor2;
-    lastColor2 = lastColor1;
-    lastColor1 = color;
+        lastPos3 = lastPos2;
+        lastPos2 = lastPos1;
+        lastPos1 = square;
 
-    lastPos3 = lastPos2;
-    lastPos2 = lastPos1;
-    lastPos1 = square;
+        rand9 = genRandNum(9);
+        rand10 = genRandNum(10);
+        square = posArr[rand9];
+        color = colorArr[rand10]
+        square.css('background-color', color);
 
-    rand9 = genRandNum(9);
-    rand10 = genRandNum(10);
-    square = posArr[rand9];
-    color = colorArr[rand10]
-    square.css('background-color', color);
+        total++;
+        $totalPlacements.text(total);
 
-    total++;
-    $totalPlacements.text(total);
-
-  }, 2500);
+        numPlacements++;
+      } else {
+        gameEnd();
+      }
+    }, 2500);
+  }
 
   const updateCorrect = () => {
     correct++;
@@ -86,6 +99,21 @@ $(document).ready(function() {
     incorrect++;
     $incorrect.text(incorrect);
   }
+
+  $newGameBtn.on('click', function() {
+    gameOver = false;
+    numPlacements = 0;
+    total = 0;
+    correct = 0;
+    incorrect = 0;
+    missedPos = 0;
+    missedColor = 0;
+    $missedPosition.text(missedPos);
+    $missedColor.text(missedColor);
+    $totalPlacements.text(total);
+    $correct.text(correct);
+    $incorrect.text(incorrect);
+  });
 
   $locationBtn.on('click', function() {
     locationClicked = true;
